@@ -110,7 +110,7 @@ class NginxExtension extends Extension {
         });
 
         await this.template(instance, generatedConfig, 'nginx config', confFile, `${nginxConfigPath}/sites-available`);
-        await this.ui.sudo(`ln -sf ${nginxConfigPath}/sites-available/${confFile} ${nginxConfigPath}/sites-enabled/${confFile}`);
+        await this.ui.sudo(`ln -rsf ${nginxConfigPath}/sites-available/${confFile} ${nginxConfigPath}/sites-enabled/${confFile}`);
         await this.restartNginx();
     }
 
@@ -197,7 +197,7 @@ class NginxExtension extends Extension {
                 });
 
                 await this.template(instance, generatedSslConfig, 'ssl config', confFile, `${nginxConfigPath}/sites-available`);
-                await this.ui.sudo(`ln -sf ${nginxConfigPath}/sites-available/${confFile} ${nginxConfigPath}/sites-enabled/${confFile}`);
+                await this.ui.sudo(`ln -rsf ${nginxConfigPath}/sites-available/${confFile} ${nginxConfigPath}/sites-enabled/${confFile}`);
             })
         }, {
             title: 'Restarting Nginx',
